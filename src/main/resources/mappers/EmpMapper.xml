@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper 경로지정 -->
+<mapper namespace="edu.global.ex.mapper.EmpMapper">
+
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM emp
+		]]>
+	</select>
+	
+	<select id="getListWithPaging" resultType="EmpVO">
+		<![CDATA[
+			SELECT * FROM (
+    			SELECT ROWNUM AS RNUM, A.* FROM (
+        			SELECT * FROM emp 
+    			) A WHERE ROWNUM <= #{pageNum} * #{amount}
+         	) WHERE RNUM > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="getList" resultType="EmpVO">
+		<![CDATA[
+			SELECT * FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO
+		]]>
+	</select>
+
+	<!-- VO객체와 데이터베이스 컬럼을 매핑 -->
+	<resultMap id="empMap" type="EmpVO">
+		<id property="empno" column="empno" /> <!-- id = key (result로 해도 상관없음) -->
+		<result property="ename" column="ename" />
+		<result property="job" column="job" />
+		<result property="mgr" column="mgr" />
+		<result property="hiredate" column="hiredate" />
+		<result property="sal" column="sal" />
+		<result property="comm" column="comm" />
+		<result property="deptno" column="deptno" />
+	</resultMap>
+
+	<resultMap id="deptMap" type="DeptVO">
+		<id property="deptno" column="deptno" />
+		<result property="dname" column="dname" />
+		<result property="loc" column="loc" />
+		<collection property="empList" resultMap="empMap"></collection> <!-- 1:N, empList 매핑 -->
+	</resultMap>   
+	
+ 	<select id="getDeptEmpList" resultMap="deptMap">
+		<![CDATA[
+			SELECT * FROM EMP, DEPT WHERE EMP.DEPTNO = DEPT.DEPTNO
+		]]>
+	</select>
+	
+</mapper>

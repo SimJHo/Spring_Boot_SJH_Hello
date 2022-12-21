@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        // 객체 속성과 메소드
+        var objCar = {
+            width : "3m",
+            height : "2m",
+            cc : "2000cc",
+            energy : 100,
+            speed : function(power){
+                return this.energy * power;
+            }
+        };
+
+        console.log("objCar.speed : " + objCar.speed(2));
+
+        // 반복문을 통한 객체 접근
+        var print = "";
+
+        for(var key in objCar){
+            print += key + " : " + objCar[key] + "\n"
+        }
+
+        console.log(print);
+
+
+        let grade = {
+            kor : parseInt(prompt("국어점수>")),
+            eng : parseInt(prompt("영어점수>")),
+            mat : parseInt(prompt("수학점수>")),
+            total : function(){
+                return this.kor + this.eng + this.mat;
+            },
+            avg : function(){
+                return (this.kor + this.eng + this.mat) / 3.0;
+            }
+        }
+
+        document.write("국어 : " + grade.kor + " / 영어 : " + grade.eng + " / 수학 : " + grade.mat + "<br>");
+        document.write("총점 : " + grade.total() + " / 평균 : " + grade.avg());
+        
+        // window 객체
+        var newWindow = window.open("http://www.google.com", "openWindow", "width=500, height=300");
+
+        //위치 조정
+        newWindow.moveTo(50, 50);
+
+        for(var i=0; i<1000; i++) {
+            newWindow.moveBy(1, 1);
+        }
+        
+        //사이즈 조정
+        newWindow.resizeTo(500, 600);
+
+        for(var i=0; i<200; i++) {
+            newWindow.resizeBy(-1, -1);
+        }
+
+        
+    </script>
+    
+</body>
+</html>

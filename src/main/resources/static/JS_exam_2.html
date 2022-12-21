@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<style>
+    h1{
+        color: darkcyan;
+    }
+    #cEventAdd {
+       width: 200px; height: 100px;
+       line-height: 100px;
+       text-align: center;
+       font-size: 1.2em;
+       background-color: #f00;
+       color: #fff;
+       font-weight: bolder;
+    }
+    
+    #cEventRem {
+       width: 200px; height: 100px;
+       line-height: 100px;
+       text-align: center;
+       font-size: 1.2em;
+       background-color: #0f0;
+       color: #fff;
+       font-weight: bolder;
+    }
+ </style>
+<body>
+
+    <script>
+
+        var imgNode = document.createElement("img");
+
+        imgNode.setAttribute("src", "https://miro.medium.com/max/1165/1*IO7SQYwDxEf7C_Q5LVhdRQ.jpeg");
+        imgNode.setAttribute("width", 300);
+        imgNode.setAttribute("height", 200);
+
+        document.body.appendChild(imgNode);
+
+        
+        window.onload = function(){
+            var titleNode = document.getElementById("jsTitle");
+
+            titleNode.innerText = "자바스트립트로 텍스트 동적 생성";
+            titleNode.style.fontSize = "1.2em";
+            titleNode.style.border = "1px solid #ff0000";
+
+            var elementNode = document.createElement("h1");
+            var textNode = document.createTextNode("javascript & node.js");
+
+            elementNode.appendChild(textNode);
+            document.body.appendChild(elementNode);
+        }
+        
+
+        $(document).ready(function(){
+            $("#jsTitle2").css("color", "blue")
+                        .css("font-size", "30px")
+                        .css("font-weight", "bolder")
+                        .text("Jquery로 텍스트 동적 생성");
+
+            function addHandler(){
+                console.log("click!");
+            }
+
+            function removeHandler(){
+                console.log("event remove!");
+                ceA.removeEventListener("click", addHandler, false);
+            }
+
+            var ceA = document.getElementById("cEventAdd");
+            ceA.addEventListener("click", addHandler, false);
+
+            var ceR = document.getElementById("cEventRem");
+            ceR.addEventListener("click", removeHandler, false);
+            
+        });
+
+        
+        
+    </script>
+    
+    <p id="jsTitle"></p>
+
+    <p id="jsTitle2"></p>
+
+    <div id="cEventAdd">click event</div>
+
+    <div id="cEventRem">remove event</div>
+</body>
+</html>
